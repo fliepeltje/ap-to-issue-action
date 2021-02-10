@@ -13,7 +13,7 @@ Create a workflow file in your .github/workflows directory as follows:
         steps:
           - uses: "actions/checkout@master"
           - name: "AP to Issue"
-            uses: "fliepeltje/ap-to-issue-action@v2.4.1"
+            uses: "fliepeltje/ap-to-issue-action"
             id: "ap"
             with:
               TOKEN: ${{ secrets.GITHUB_TOKEN }}
