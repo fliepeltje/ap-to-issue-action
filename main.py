@@ -63,6 +63,7 @@ def get_diff() -> str:
             "Authorization": f"token {TOKEN}",
         },
     )
+    print("Diff:\n\n\n", response.json(), "\n\n\n")
     if response.status_code == 200:
         return response.text
     else:
