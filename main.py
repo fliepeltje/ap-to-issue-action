@@ -69,7 +69,7 @@ def get_diff() -> str:
     files = response.json()["files"]
     scannable_content = ""
     for f in files:
-        with open(f, "r") as modified_file:
+        with open(f["filename"], "r") as modified_file:
             scannable_content += "\n" + modified_file.read()
     return scannable_content
 
