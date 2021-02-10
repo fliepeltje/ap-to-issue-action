@@ -13,7 +13,7 @@ REPO = os.environ.get("INPUT_REPO")
 TOKEN = os.environ.get("INPUT_TOKEN")
 PREV_COMMIT = os.environ.get("INPUT_BEFORE")
 SHA = os.environ.get("INPUT_SHA")
-LOOKUP_TABLE_STRING = os.environ.get("LOOKUP_TABLE")
+LOOKUP_TABLE_STRING = os.environ.get("INPUT_LOOKUP_TABLE")
 LOOKUP_TABLE_ITER = (x.partition("=") for x in LOOKUP_TABLE_STRING.split())
 LOOKUP_TABLE = {k.lower().strip(): v.strip() for k, _, v in LOOKUP_TABLE_ITER}
 
