@@ -1,0 +1,29 @@
+name: "Meeting AP to Issue"
+description: "Generate GH issues from your meeting notes"
+author: "Donatas Rasiukevicius"
+runs:
+  using: "docker"
+  image: "Dockerfile"
+branding:
+  icon: "check-square"
+  color: "orange"
+inputs:
+  REPO:
+    description: "The path to the repository where the action will be used (automatically set)"
+    required: true
+    default: "${{ github.repository }}"
+  BEFORE:
+    description: "The SHA of the last pushed commit (automatically set)"
+    required: true
+    default: "${{ github.event.before }}"
+  SHA:
+    description: "The SHA of the latest commit (automatically set)"
+    required: true
+    default: "${{ github.sha }}"
+  TOKEN:
+    description: "The GitHub access token to allow us to retrieve, create and update issues (automatically set)"
+    required: true
+  LOOKUP_TABLE:
+    description: "KV values with mappings between name and gh username"
+    required: true
+
