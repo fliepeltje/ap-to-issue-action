@@ -15,6 +15,7 @@ SHA = os.environ.get("INPUT_SHA")
 LOOKUP_TABLE_STRING = os.environ.get("INPUT_LOOKUP_TABLE")
 LOOKUP_TABLE_ITER = (x.partition("=") for x in LOOKUP_TABLE_STRING.split())
 LOOKUP_TABLE = {k.lower().strip(): v.strip() for k, _, v in LOOKUP_TABLE_ITER}
+COLUMN = os.environ.get("INPUT_COLUMN")
 
 
 @dataclass
@@ -74,6 +75,22 @@ def get_diff() -> str:
     return scannable_content
 
 
+def create_issue_card(issue_id: int) -> None:
+    response = requests.post(
+        url=f"{BASE_URL}{REPO}/projects/columns/{COLUMN}/cards",
+        headers={
+            "Content-Type": "application/json",
+            "Authorization": f"token {TOKEN}",
+        },
+        json={"content_id": issue_id},
+    )
+    if response.ok:
+        print("Moved issue to board")
+    else:
+        print("Failed ot move issue")
+        print(response.json())
+
+
 def create_issue(issue: Issue) -> None:
     response = requests.post(
         url=f"{BASE_URL}{REPO}/issues",
@@ -92,6 +109,8 @@ def create_issue(issue: Issue) -> None:
     )
     if response.status_code == 201:
         print(f"created issue: {issue}")
+        issue_id = response.json()["id"]
+        create_issue_card(issue_id)
     else:
         print(f"failed to create issue: {issue}\n\n")
         print(response.json())

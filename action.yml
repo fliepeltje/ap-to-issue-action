@@ -26,4 +26,7 @@ inputs:
   LOOKUP_TABLE:
     description: "KV values with mappings between name and gh username"
     required: true
+  COLUMN:
+    description: "The default column ID to which move new issues"
+    required: true
 
