@@ -63,11 +63,15 @@ def get_diff() -> str:
             "Authorization": f"token {TOKEN}",
         },
     )
-    print("Diff:\n\n\n", response.json(), "\n\n\n")
-    if response.status_code == 200:
-        return response.text
-    else:
+    if not response.status_code == 200:
         raise ConnectionError()
+
+    files = response.json()["files"]
+    scannable_content = ""
+    for f in files:
+        with open(f, "r") as modified_file:
+            scannable_content += "\n" + modified_file.read()
+    return scannable_content
 
 
 def create_issue(issue: Issue) -> None:
