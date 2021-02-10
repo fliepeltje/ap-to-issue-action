@@ -71,7 +71,7 @@ def get_diff() -> str:
 
 def create_issue(issue: Issue) -> None:
     response = requests.post(
-        url=f"{BASE_URL}/issues",
+        url=f"{BASE_URL}{REPO}/issues",
         headers={
             "Content-Type": "application/json",
             "Authorization": f"token {TOKEN}",
