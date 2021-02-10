@@ -27,7 +27,7 @@ class Issue:
     @classmethod
     def from_text(cls, issue_text: str) -> "Issue":
         assignee_text, _, issue = issue_text.partition(":")
-        title, _, description = issue.partition("\n")
+        title, _, description = issue.replace("\\n", "\n").partition("\n")
         return cls(
             assignees=[x.strip() for x in assignee_text.replace("!", "").split("|")],
             title=title.strip(),
