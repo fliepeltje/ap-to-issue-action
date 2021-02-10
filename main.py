@@ -88,7 +88,8 @@ def create_issue(issue: Issue) -> None:
     if response.status_code == 201:
         print(f"created issue: {issue}")
     else:
-        print(f"failed to create issue: {issue}")
+        print(f"failed to create issue: {issue}\n\n")
+        print(response.json())
 
     sleep(0.5)
 
