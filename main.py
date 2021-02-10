@@ -70,8 +70,11 @@ def get_diff() -> str:
     files = response.json()["files"]
     scannable_content = ""
     for f in (f for f in files if f["filename"].endswith(".md")):
-        with open(f["filename"], "r") as modified_file:
-            scannable_content += "\n" + modified_file.read()
+        try:
+            with open(f["filename"], "r") as modified_file:
+                scannable_content += "\n" + modified_file.read()
+        except FileNotFoundError:
+            print("Notes deleted for file", f["filename"])
     return scannable_content
 
 
